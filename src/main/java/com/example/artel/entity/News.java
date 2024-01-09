@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -23,10 +23,10 @@ public class News {
     private String description_en;
     private String description_uz;
     private String description_ru;
-    private Date createdDate;
-    private byte [] blob;
+    private LocalDateTime createdDate;
+//    private byte [] blob;
 
-//    @OneToOne
-//    private ImageData imageData;
+    @OneToOne
+    private ImageData imageData;
 
 }

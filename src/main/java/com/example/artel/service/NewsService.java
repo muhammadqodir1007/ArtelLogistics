@@ -1,8 +1,14 @@
 package com.example.artel.service;
 
-import com.example.artel.entity.Information;
 import com.example.artel.entity.News;
-import org.springframework.stereotype.Service;
+import com.example.artel.payload.NewsDto;
 
-public interface NewsService extends AbstractService<News> {
+import java.io.IOException;
+
+public interface NewsService extends AbstractService<News,NewsDto> {
+
+    @Override
+    News insert(NewsDto news) throws IOException;
+
+
 }

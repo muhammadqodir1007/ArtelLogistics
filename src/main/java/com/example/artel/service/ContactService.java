@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
-public interface ContactService extends AbstractService<Contact> {
+public interface ContactService extends AbstractService<Contact,Contact> {
 
 
 

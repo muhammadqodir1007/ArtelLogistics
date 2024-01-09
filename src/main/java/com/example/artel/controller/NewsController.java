@@ -31,7 +31,7 @@ public class NewsController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable int id, @RequestBody News news) {
-        newsService.update(id, news);
+        newsService.update(id, );
         return ResponseEntity.ok("updated successfully");
 
     }
@@ -42,7 +42,7 @@ public class NewsController {
     }
 
     @PostMapping
-    public ResponseEntity<?> insert(@RequestBody News news) {
+    public ResponseEntity<?> insert(@RequestParam ) {
 
         News insert = newsService.insert(news);
         return ResponseEntity.ok(insert);
