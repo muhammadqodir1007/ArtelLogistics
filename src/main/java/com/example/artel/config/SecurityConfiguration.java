@@ -31,18 +31,35 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     private final LogoutHandler logoutHandler;
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .cors(httpSecurityCorsConfigurer ->
+
+        CorsConfiguration configuration=new CorsConfiguration();
+        configuration.addAllowedOrigin("*");
+        configuration.addAllowedMethod("*");
+        configuration.addAllowedHeader("*");
+        configuration.setAllowCredentials(false);
+        configuration.setMaxAge(3600L); // 1 hour
+
+
+//
+//        http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configure(httpSecurityCorsConfigurer.disable()
+//
+//                )
+//
+//
+
+
+                http.cors(httpSecurityCorsConfigurer ->
                         httpSecurityCorsConfigurer.configurationSource(request ->
-                                new CorsConfiguration().applyPermitDefaultValues()
+                                new CorsConfiguration(configuration)
                         ))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
-                                .requestMatchers(HttpMethod.POST,"/api/users/**").hasAnyRole(ADMIN.name())
+                                .requestMatchers(HttpMethod.POST, "/api/users/**").hasAnyRole(ADMIN.name())
                                 .anyRequest()
                                 .authenticated()
                 )

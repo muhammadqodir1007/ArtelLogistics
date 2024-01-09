@@ -4,6 +4,7 @@ import com.example.artel.entity.Contact;
 import com.example.artel.service.ContactService;
 import com.example.artel.telegram.SenderTelegramBot;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,11 +44,11 @@ public class ContactController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteById(@PathVariable int id) {
         contactService.deleteById(id);
-        return ResponseEntity.ok("Resource deleted successfully");
+        return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable int id, @RequestBody Contact contact) {
+    public HttpEntity<?> update(@PathVariable int id, @RequestBody Contact contact) {
         contactService.update(id, contact);
         return ResponseEntity.ok("Resource updated successfully");
 
