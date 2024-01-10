@@ -25,7 +25,7 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 public class SecurityConfiguration {
 
 
-    private static final String[] WHITE_LIST_URL = {"/api/auth/**",
+    private static final String[] WHITE_LIST_URL = {"/api/auth/**", "/api/image/**",
             "/swagger-ui.html"};
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
@@ -35,23 +35,13 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        CorsConfiguration configuration=new CorsConfiguration();
+        CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin("*");
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(false);
         configuration.setMaxAge(3600L); // 1 hour
-
-
-//
-//        http.cors(httpSecurityCorsConfigurer -> httpSecurityCorsConfigurer.configure(httpSecurityCorsConfigurer.disable()
-//
-//                )
-//
-//
-
-
-                http.cors(httpSecurityCorsConfigurer ->
+        http.cors(httpSecurityCorsConfigurer ->
                         httpSecurityCorsConfigurer.configurationSource(request ->
                                 new CorsConfiguration(configuration)
                         ))
@@ -60,6 +50,8 @@ public class SecurityConfiguration {
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
                                 .requestMatchers(HttpMethod.POST, "/api/users/**").hasAnyRole(ADMIN.name())
+                                .requestMatchers(HttpMethod.GET, "/api/news/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/information/**").permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )

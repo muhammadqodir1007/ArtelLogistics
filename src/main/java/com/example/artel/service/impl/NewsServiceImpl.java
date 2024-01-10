@@ -2,11 +2,8 @@ package com.example.artel.service.impl;
 
 import com.example.artel.entity.News;
 import com.example.artel.exception.ResourceNotFoundException;
-import com.example.artel.image.ImageData;
 import com.example.artel.image.ImageDataService;
 import com.example.artel.image.ImageRepository;
-import com.example.artel.image.ImageUtil;
-import com.example.artel.payload.NewsDto;
 import com.example.artel.repository.NewsRepository;
 import com.example.artel.service.NewsService;
 import lombok.AllArgsConstructor;
@@ -43,38 +40,43 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public void update(int id, NewsDto news) throws IOException {
+    public void update(int id, News news) throws IOException {
         News editedNews = newsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("news not found"));
-        ImageData imageData = ImageData.builder()
-                .name(news.getFile().getOriginalFilename())
-                .type(news.getFile().getContentType())
-                .imageData(ImageUtil.compressImage(news.getFile().getBytes())).build();
-//        editedNews.setImageData(imageData);
-        editedNews.setTitle_en(news.getTitle_en());
-        editedNews.setTitle_ru(news.getTitle_ru());
-        editedNews.setTitle_uz(news.getTitle_uz());
-        editedNews.setDescription_en(news.getDescription_en());
-        editedNews.setDescription_uz(news.getDescription_uz());
-        editedNews.setDescription_ru(news.getDescription_ru());
-        newsRepository.save(editedNews);
+        News news1 = checkNews(editedNews, news);
+        newsRepository.save(news1);
     }
 
     @Override
-    public News insert(NewsDto newsDto) throws IOException {
-        ImageData imageData = ImageData.builder()
-                .name(newsDto.getFile().getOriginalFilename())
-                .type(newsDto.getFile().getContentType())
-                .imageData(ImageUtil.compressImage(newsDto.getFile().getBytes())).build();
-        News news = new News();
-//        news.setImageData(imageData);
-        news.setTitle_en(newsDto.getTitle_en());
-        news.setTitle_uz(newsDto.getTitle_uz());
-        news.setTitle_ru(newsDto.getTitle_ru());
+    public News insert(News news) throws IOException {
         news.setCreatedDate(LocalDateTime.now());
-        news.setDescription_uz(news.getDescription_uz());
-        news.setDescription_en(news.getDescription_en());
-        news.setDescription_ru(news.getDescription_ru());
         return newsRepository.save(news);
+
+    }
+
+    private News checkNews(News first, News second) {
+        if (second.getDescription_ru() != null) {
+            first.setDescription_ru(second.getDescription_ru());
+        }
+        if (second.getDescription_uz() != null) {
+            first.setDescription_uz(second.getDescription_uz());
+        }
+        if (second.getDescription_en() != null) {
+            first.setDescription_en(second.getDescription_en());
+        }
+        if (second.getTitle_en() != null) {
+            first.setTitle_en(second.getTitle_en());
+        }
+        if (second.getTitle_uz() != null) {
+            first.setTitle_uz(second.getTitle_uz());
+        }
+        if (second.getTitle_ru() != null) {
+            first.setTitle_ru(second.getTitle_ru());
+        }
+        if (second.getJpgName() != null) {
+            first.setJpgName(second.getJpgName());
+        }
+        return first;
+
     }
 
 }

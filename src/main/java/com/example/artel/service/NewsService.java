@@ -5,10 +5,8 @@ import com.example.artel.payload.NewsDto;
 
 import java.io.IOException;
 
-public interface NewsService extends AbstractService<News,NewsDto> {
+public interface NewsService extends AbstractService<News> {
 
-    @Override
-    News insert(NewsDto news) throws IOException;
 
 
 }
