@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -18,15 +20,17 @@ public class Vacancy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    String name;
-    String title_uz;
-    String title_ru;
-    String title_en;
-    String description_uz;
-    String description_en;
-    String description_ru;
-    String workdays;
-    String workHours;
+    private boolean remote;
+    private String title_uz;
+    private String title_ru;
+    private String title_en;
+    private String description_uz;
+    private String description_en;
+    private String description_ru;
+    private String workdays;
+    private String workHours;
+    private String location;
+    private LocalDateTime createdAt;
 
 
 }

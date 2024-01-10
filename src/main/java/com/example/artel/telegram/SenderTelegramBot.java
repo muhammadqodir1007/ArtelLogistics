@@ -5,7 +5,6 @@
 package com.example.artel.telegram;
 
 import com.example.artel.entity.Contact;
-import com.example.artel.entity.Question;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -27,15 +26,15 @@ public class SenderTelegramBot {
         }
     }
 
-    public void sendQuestion(Question question) {
-        long chatId = telegramBot.getChatId();
-
-        try {
-            telegramBot.execute(new SendMessage(String.valueOf(chatId), formatQuestion(question)));
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void sendQuestion(Question question) {
+//        long chatId = telegramBot.getChatId();
+//
+//        try {
+//            telegramBot.execute(new SendMessage(String.valueOf(chatId), formatQuestion(question)));
+//        } catch (TelegramApiException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private String formatContact(Contact contact) {
         return "Contact" + "\n" + "\n" +
@@ -49,20 +48,20 @@ public class SenderTelegramBot {
     }
 
 
-    private String formatQuestion(Question question) {
-
-        return "Question" + "\n\n" +
-                "First Name: " + question.getFirstName() + "\n" +
-                "Last Name: " + question.getLastName() + "\n" +
-                "State: " + question.getState() + "\n" +
-                "City: " + question.getCity() + "\n" +
-                "Zip Code: " + question.getZipCode() + "\n" +
-                "Phone: " + question.getPhone() + "\n" +
-                "Email: " + question.getEmail() + "\n" +
-                "Experience: " + question.getExperience() + "\n" +
-                "Comment: " + question.getComment() + "\n\n" +
-                "#question";
-    }
+//    private String formatQuestion(Question question) {
+//
+//        return "Question" + "\n\n" +
+//                "First Name: " + question.getFirstName() + "\n" +
+//                "Last Name: " + question.getLastName() + "\n" +
+//                "State: " + question.getState() + "\n" +
+//                "City: " + question.getCity() + "\n" +
+//                "Zip Code: " + question.getZipCode() + "\n" +
+//                "Phone: " + question.getPhone() + "\n" +
+//                "Email: " + question.getEmail() + "\n" +
+//                "Experience: " + question.getExperience() + "\n" +
+//                "Comment: " + question.getComment() + "\n\n" +
+//                "#question";
+//    }
 
 
 }

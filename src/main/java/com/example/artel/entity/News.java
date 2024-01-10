@@ -1,7 +1,9 @@
 package com.example.artel.entity;
 
-import com.example.artel.image.ImageData;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,9 +26,6 @@ public class News {
     private String description_uz;
     private String description_ru;
     private LocalDateTime createdDate;
-//    private byte [] blob;
-
-    @OneToOne
-    private ImageData imageData;
+    private String imageData;
 
 }

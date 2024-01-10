@@ -34,15 +34,41 @@ public class InformationServiceImpl implements InformationService {
     @Override
     public void update(int id, Information information) {
         Information editedInformation = informationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Information not found"));
-        editedInformation.setAbout_en(information.getAbout_en());
-        editedInformation.setNumber(information.getNumber());
-        editedInformation.setLocation(information.getLocation());
-        editedInformation.setEmail(information.getEmail());
-        informationRepository.save(editedInformation);
+        Information information1 = checkInformation(editedInformation, information);
+
+        informationRepository.save(information1);
     }
 
     @Override
     public Information insert(Information information) {
-    return     informationRepository.save(information);
+        return informationRepository.save(information);
+    }
+
+
+    private Information checkInformation(Information oldInformation, Information newInformation) {
+
+        if (newInformation.getAbout_en() != null) {
+            oldInformation.setAbout_en(newInformation.getAbout_en());
+        }
+        if (newInformation.getAbout_ru() != null) {
+            oldInformation.setAbout_ru(newInformation.getAbout_ru());
+        }
+        if (newInformation.getAbout_uz() != null) {
+            oldInformation.setAbout_uz(newInformation.getAbout_uz());
+        }
+        if (newInformation.getNumber() != null) {
+            oldInformation.setNumber(newInformation.getNumber());
+        }
+        if (newInformation.getEmail() != null) {
+            oldInformation.setEmail(newInformation.getEmail());
+        }
+        if (newInformation.getLocation() != null) {
+            oldInformation.setLocation(newInformation.getLocation());
+
+
+        }
+        return oldInformation;
     }
 }
+
+

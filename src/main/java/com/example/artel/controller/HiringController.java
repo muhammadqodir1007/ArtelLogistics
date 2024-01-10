@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -29,7 +30,7 @@ public class HiringController {
     }
 
     @PostMapping
-    public ResponseEntity<?> insert(@RequestBody Hiring hiring) {
+    public ResponseEntity<?> insert(@RequestBody Hiring hiring) throws IOException {
         Hiring insert = hiringService.insert(hiring);
         return ResponseEntity.ok(insert);
     }
@@ -42,7 +43,7 @@ public class HiringController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable int id, @RequestBody Hiring hiring) {
+    public ResponseEntity<?> update(@PathVariable int id, @RequestBody Hiring hiring) throws IOException {
 
         hiringService.update(id, hiring);
         return ResponseEntity.ok("updated Successfully");

@@ -49,7 +49,7 @@ public class NewsServiceImpl implements NewsService {
                 .name(news.getFile().getOriginalFilename())
                 .type(news.getFile().getContentType())
                 .imageData(ImageUtil.compressImage(news.getFile().getBytes())).build();
-        editedNews.setImageData(imageData);
+//        editedNews.setImageData(imageData);
         editedNews.setTitle_en(news.getTitle_en());
         editedNews.setTitle_ru(news.getTitle_ru());
         editedNews.setTitle_uz(news.getTitle_uz());
@@ -66,7 +66,7 @@ public class NewsServiceImpl implements NewsService {
                 .type(newsDto.getFile().getContentType())
                 .imageData(ImageUtil.compressImage(newsDto.getFile().getBytes())).build();
         News news = new News();
-        news.setImageData(imageData);
+//        news.setImageData(imageData);
         news.setTitle_en(newsDto.getTitle_en());
         news.setTitle_uz(newsDto.getTitle_uz());
         news.setTitle_ru(newsDto.getTitle_ru());

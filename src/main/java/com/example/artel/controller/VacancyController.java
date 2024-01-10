@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -29,7 +30,7 @@ public class VacancyController {
     }
 
     @PostMapping
-    public ResponseEntity<?> insert(@RequestBody Vacancy vacancy) {
+    public ResponseEntity<?> insert(@RequestBody Vacancy vacancy) throws IOException {
         Vacancy insert = vacancyService.insert(vacancy);
         return ResponseEntity.ok(insert);
 
@@ -43,10 +44,13 @@ public class VacancyController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable int id, @RequestBody Vacancy vacancy) {
+    public ResponseEntity<?> update(@PathVariable int id, @RequestBody Vacancy vacancy) throws IOException {
         vacancyService.update(id, vacancy);
         return ResponseEntity.ok("updated successfully");
     }
+
+
+
 
 
 }
