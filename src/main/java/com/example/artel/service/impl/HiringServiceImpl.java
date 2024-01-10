@@ -34,16 +34,37 @@ public class HiringServiceImpl implements HiringService {
     @Override
     public void update(int id, Hiring hiring) {
         Hiring hiring1 = hiringRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("hiring data not found"));
-        hiring1.setComment(hiring.getComment());
-        hiring1.setName(hiring.getName());
-        hiring1.setEmail(hiring.getEmail());
-        hiring1.setCity(hiring.getCity());
-        hiring1.setExperience(hiring.getExperience());
-        hiringRepository.save(hiring1);
+        Hiring hiring2 = checkHiring(hiring1, hiring);
+        hiringRepository.save(hiring2);
     }
 
     @Override
     public Hiring insert(Hiring hiring) {
         return hiringRepository.save(hiring);
+    }
+
+
+    private Hiring checkHiring(Hiring oldHiring, Hiring newHiring) {
+
+        if (newHiring.getCity() != null) {
+            oldHiring.setCity(newHiring.getCity());
+        }
+        if (newHiring.getName() != null) {
+            oldHiring.setName(newHiring.getName());
+        }
+        if (newHiring.getPhone() != null) {
+            oldHiring.setPhone(newHiring.getPhone());
+        }
+        if (newHiring.getComment() != null) {
+            oldHiring.setComment(newHiring.getComment());
+        }
+        if (newHiring.getExperience() != null) {
+            oldHiring.setExperience(newHiring.getExperience());
+        }
+        if (newHiring.getEmail() != null) {
+            oldHiring.setEmail(newHiring.getEmail());
+        }
+        return oldHiring;
+
     }
 }
