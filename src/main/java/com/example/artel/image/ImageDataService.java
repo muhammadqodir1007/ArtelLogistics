@@ -14,23 +14,23 @@ public class ImageDataService {
 
     private ImageRepository imageDataRepository;
 
-    public ImageUploadResponse uploadImage(MultipartFile file) throws IOException {
+    public ImageData uploadImage(MultipartFile file) throws IOException {
 
-        imageDataRepository.save(ImageData.builder()
+        return imageDataRepository.save(ImageData.builder()
                 .name(file.getOriginalFilename())
                 .type(file.getContentType())
                 .imageData(ImageUtil.compressImage(file.getBytes())).build());
 
-        return new ImageUploadResponse("Image uploaded successfully: " +
-                file.getOriginalFilename());
-
     }
 
     @Transactional
-    public ImageData getInfoByImageByName(String name) {
-        Optional<ImageData> dbImage = imageDataRepository.findByName(name);
-
+    public ImageData getInfoByImageById(Long id) {
+        Optional<ImageData> dbImage = imageDataRepository.findById(id);
+        if (dbImage.isEmpty()) {
+            return null;
+        }
         return ImageData.builder()
+
                 .name(dbImage.get().getName())
                 .type(dbImage.get().getType())
                 .imageData(ImageUtil.decompressImage(dbImage.get().getImageData())).build();
@@ -38,10 +38,10 @@ public class ImageDataService {
     }
 
     @Transactional
-    public byte[] getImage(String name) {
-        Optional<ImageData> dbImage = imageDataRepository.findByName(name);
-        byte[] image = ImageUtil.decompressImage(dbImage.get().getImageData());
-        return image;
+    public byte[] getImage(Long id) {
+        Optional<ImageData> dbImage = imageDataRepository.findById(id);
+        if (dbImage.isEmpty()) return null;
+        return ImageUtil.decompressImage(dbImage.get().getImageData());
     }
 
 

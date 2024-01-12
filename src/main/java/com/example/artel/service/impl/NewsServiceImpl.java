@@ -72,8 +72,8 @@ public class NewsServiceImpl implements NewsService {
         if (second.getTitle_ru() != null) {
             first.setTitle_ru(second.getTitle_ru());
         }
-        if (second.getJpgName() != null) {
-            first.setJpgName(second.getJpgName());
+        if (second.getJpgId() != null) {
+            first.setJpgId(second.getJpgId());
         }
         return first;
 

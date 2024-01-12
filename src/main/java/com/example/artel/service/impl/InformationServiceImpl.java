@@ -1,6 +1,7 @@
 package com.example.artel.service.impl;
 
 import com.example.artel.entity.Information;
+import com.example.artel.exception.DuplicateEntityException;
 import com.example.artel.exception.ResourceNotFoundException;
 import com.example.artel.repository.InformationRepository;
 import com.example.artel.service.InformationService;
@@ -41,7 +42,15 @@ public class InformationServiceImpl implements InformationService {
 
     @Override
     public Information insert(Information information) {
-        return informationRepository.save(information);
+        long count = informationRepository.count();
+        System.out.println(count);
+        Information save = null;
+        if (count >= 1) {
+            throw new DuplicateEntityException("information already exists");
+        } else {
+            save = informationRepository.save(information);
+        }
+        return save;
     }
 
 

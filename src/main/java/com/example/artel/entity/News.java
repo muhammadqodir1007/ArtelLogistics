@@ -26,6 +26,6 @@ public class News {
     private String description_uz;
     private String description_ru;
     private LocalDateTime createdDate;
-    private String jpgName;
+    private Long jpgId;
 
 }

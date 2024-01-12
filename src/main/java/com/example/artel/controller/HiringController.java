@@ -2,6 +2,7 @@ package com.example.artel.controller;
 
 import com.example.artel.entity.Hiring;
 import com.example.artel.service.HiringService;
+import com.example.artel.telegram.SenderTelegramBot;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +13,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/hiring")
 @AllArgsConstructor
+
 public class HiringController {
 
 
     HiringService hiringService;
+    SenderTelegramBot senderTelegramBot;
 
     @GetMapping
     public List<Hiring> getAll() {
@@ -32,6 +35,7 @@ public class HiringController {
     @PostMapping
     public ResponseEntity<?> insert(@RequestBody Hiring hiring) throws IOException {
         Hiring insert = hiringService.insert(hiring);
+        senderTelegramBot.sendHiring(hiring);
         return ResponseEntity.ok(insert);
     }
 
