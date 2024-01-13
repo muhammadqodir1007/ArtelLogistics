@@ -22,8 +22,6 @@ public class ArtelApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ArtelApplication.class, args);
-
-
     }
 
     @Bean
@@ -31,11 +29,11 @@ public class ArtelApplication {
             AuthenticationService service
     ) {
         return args -> {
-            Optional<User> user = userRepository.findByUsername("admin@mail.com");
+            Optional<User> user = userRepository.findByUsername("adminartel");
             if (user.isEmpty()) {
                 var admin = RegisterRequest.builder()
-                        .username("admin@mail.com")
-                        .password("password")
+                        .username("adminartel")
+                        .password("ADMIN2024")
                         .role(ADMIN)
                         .build();
                 System.out.println("Admin token: " + service.register(admin).getAccessToken());
@@ -46,48 +44,6 @@ public class ArtelApplication {
 
             }
 
-
-//            var manager = RegisterRequest.builder()
-////					.firstname("Admin")
-////					.lastname("Admin")
-//                    .username("manager@mail.com")
-//                    .password("password")
-//                    .role(MANAGER)
-//                    .build();
-//            System.out.println("Manager token: " + service.register(manager).getAccessToken());
-
-
-//            ItemType itemType = new ItemType();
-//            itemType.setName("45.06");
-//            ItemType itemType1 = new ItemType();
-//            itemType1.setName("47.06");
-//
-//            itemTypeRepository.save(itemType);
-//            itemTypeRepository.save(itemType1);
-//
-//            Category category = new Category();
-//            category.setName("salom");
-//            Category category1 = new Category();
-//            category1.setName("salom1");
-//
-//            categoryRepository.save(category1);
-//            categoryRepository.save(category);
-//
-//            MaterialType maaterialType = new MaterialType();
-//            maaterialType.setName("45.06");
-//            MaterialType materialType1 = new MaterialType();
-//            materialType1.setName("47.06");
-//
-//            materialTypeRepository.save(maaterialType);
-//            materialTypeRepository.save(materialType1);
-//
-//            MaterialCategory materialCategory = new MaterialCategory();
-//            materialCategory.setName("salom");
-//            MaterialCategory materialCategory1 = new MaterialCategory();
-//            materialCategory1.setName("salom1");
-//
-//            materialCategoryRepository.save(materialCategory1);
-//            materialCategoryRepository.save(materialCategory);
 
 
         };
