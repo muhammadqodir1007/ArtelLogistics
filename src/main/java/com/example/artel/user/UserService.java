@@ -30,11 +30,10 @@ public class UserService {
 
 
     public List<UserDto> getAllUsers() {
-        List<UserDto> userList = userRepository.findAll().stream()
+
+        return userRepository.findAll().stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
-
-        return userList;
     }
 
     public AuthenticationResponse insert(RegisterRequest request) {

@@ -82,8 +82,8 @@ public class AuthenticationService {
         if (validUserTokens.isEmpty())
             return;
         validUserTokens.forEach(token -> {
-            token.setExpired(true);
-            token.setRevoked(true);
+            token.setExpired(false);
+            token.setRevoked(false);
         });
         tokenRepository.saveAll(validUserTokens);
     }

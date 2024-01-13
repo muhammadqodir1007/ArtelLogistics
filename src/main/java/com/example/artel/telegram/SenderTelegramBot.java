@@ -15,8 +15,6 @@ import java.util.concurrent.Executors;
 public class SenderTelegramBot {
 
     private final TelegramBot telegramBot;
-
-    // Create a fixed-size thread pool with two threads
     private final ExecutorService executorService = Executors.newFixedThreadPool(2);
 
     public void sendContact(Contact contact) {
@@ -52,7 +50,6 @@ public class SenderTelegramBot {
                 "\n" + "#hiring";
     }
 
-    // Shutdown the executor service when the application is shutting down
     public void shutdown() {
         executorService.shutdown();
     }
