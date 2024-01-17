@@ -52,6 +52,10 @@ public class VacancyServiceImpl implements VacancyService {
         if (newVacancy.getTitle_uz() != null) {
             oldVacancy.setTitle_uz(newVacancy.getTitle_uz());
         }
+        if (newVacancy.getRemote() != null) {
+            oldVacancy.setRemote(newVacancy.getRemote());
+        }
+
         if (newVacancy.getTitle_en() != null) {
             oldVacancy.setTitle_en(newVacancy.getTitle_en());
         }

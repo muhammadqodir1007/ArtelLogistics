@@ -20,7 +20,7 @@ public class Vacancy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-    private boolean remote;
+    private Boolean remote;
     private String title_uz;
     private String title_ru;
     private String title_en;
