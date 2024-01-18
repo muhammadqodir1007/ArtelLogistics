@@ -4,7 +4,7 @@ FROM openjdk:17-oracle
 WORKDIR /app
 
 # Copy the JAR file to the container
-COPY target/Artel-0.0.1-SNAPSHOT.jar.jar /myapp.jar
+COPY target/Artel-0.0.1-SNAPSHOT.jar /myapp.jar
 
 # Expose the port your app runs on
 EXPOSE 8080
