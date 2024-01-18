@@ -1,13 +1,7 @@
-# Use a base image with Java 17
-FROM openjdk:17-oracle
-# Set the working directory
-WORKDIR /app
-
-# Copy the JAR file to the container
-COPY target/Artel-0.0.1-SNAPSHOT.jar /myapp.jar
-
-# Expose the port your app runs on
+FROM eclipse-temurin:17
+VOLUME /tmp
 EXPOSE 8080
+ARG JAR_FILE=target/Artel-0.0.1-SNAPSHOT.jar
+ADD ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
 
-# Command to run your app
-CMD ["java", "-jar", "/myapp.jar"]

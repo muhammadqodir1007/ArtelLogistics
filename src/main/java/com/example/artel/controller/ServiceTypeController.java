@@ -5,6 +5,9 @@ import com.example.artel.image.ImageData;
 import com.example.artel.image.ImageDataService;
 import com.example.artel.service.ServiceTypeService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -88,6 +91,13 @@ public class ServiceTypeController {
         serviceTypeService.update(id, news);
         return ResponseEntity.ok("updated successfully");
 
+
+    }@DeleteMapping("/{id}")
+    public HttpEntity<?> delete(@PathVariable int id){
+
+        serviceTypeService.deleteById(id);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("deleted");
 
     }
 
