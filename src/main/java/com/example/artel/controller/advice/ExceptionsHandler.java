@@ -10,6 +10,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
@@ -26,6 +27,8 @@ public class ExceptionsHandler {
                 new ErrorResponse(40401, errorMessage);
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
+
+
 
     @ExceptionHandler(DuplicateEntityException.class)
     public ResponseEntity<ErrorResponse> handleDuplicateException(DuplicateEntityException e) {
@@ -63,9 +66,10 @@ public class ExceptionsHandler {
     }
 
     @ExceptionHandler({IllegalArgumentException.class, IllegalStateException.class})
-    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException e) {
-        ErrorResponse errorResponse =
-                new ErrorResponse(40003, e.getMessage());
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<ErrorResponse> handleIllegalStateException(Exception e) {
+        String errorMessage = (e instanceof IllegalArgumentException) ? e.getMessage() : "Illegal State Exception";
+        ErrorResponse errorResponse = new ErrorResponse(40003, errorMessage);
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
 

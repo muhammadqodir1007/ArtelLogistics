@@ -34,7 +34,10 @@ public class InformationController {
     }
 
     @PostMapping
-    public HttpEntity<?> insert(@RequestParam("about_en") String about_en, @RequestParam("about_ru") String about_ru, @RequestParam("about_uz") String about_uz, @RequestParam("email") String email, @RequestParam("number") String number, @RequestParam("location") String location, @RequestParam("image") MultipartFile file
+    public HttpEntity<?> insert(@RequestParam("about_en") String about_en, @RequestParam("about_ru") String about_ru,
+                                @RequestParam("about_uz") String about_uz, @RequestParam("email") String email,
+                                @RequestParam("number") String number, @RequestParam("location") String location,
+                                @RequestParam("image") MultipartFile file
 
     ) throws IOException {
         ImageData imageData = imageDataService.uploadImage(file);
