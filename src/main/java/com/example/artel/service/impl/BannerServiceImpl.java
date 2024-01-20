@@ -4,12 +4,14 @@ import com.example.artel.entity.Banner;
 import com.example.artel.exception.ResourceNotFoundException;
 import com.example.artel.repository.BannerRepository;
 import com.example.artel.service.BannerService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class BannerServiceImpl implements BannerService {
     BannerRepository bannerRepository;
 
