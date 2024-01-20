@@ -41,7 +41,7 @@ public class BannerController {
 
 
     @PostMapping
-    public HttpEntity<?> insert(@RequestParam MultipartFile file) throws IOException {
+    public HttpEntity<?> insert(@RequestParam("image") MultipartFile file) throws IOException {
         ImageData imageData = imageDataService.uploadImage(file);
         Banner banner = new Banner();
         banner.setImage(imageData.getId());

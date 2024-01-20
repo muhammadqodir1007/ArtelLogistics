@@ -54,6 +54,9 @@ public class TestimonyServiceImpl implements TestimonyService {
         if (newTestimony.getImage() != null) {
             oldTestimony.setImage(newTestimony.getImage());
         }
+        if (newTestimony.getName() != null) {
+            oldTestimony.setName(newTestimony.getName());
+        }
         if (newTestimony.getJob() != null) {
             oldTestimony.setJob(newTestimony.getJob());
         }

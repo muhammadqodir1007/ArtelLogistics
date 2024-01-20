@@ -19,5 +19,6 @@ public class Testimony {
     private int id;
     private Long image;
     private String job;
+    private String name;
     private String comment;
 }

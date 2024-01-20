@@ -37,11 +37,13 @@ public class TestimonyController {
     }
 
     @PostMapping
-    public HttpEntity<?> insert(@RequestParam("comment") String comment, @RequestParam("job") String job, @RequestParam
-    MultipartFile file) throws IOException {
+    public HttpEntity<?> insert(@RequestParam("comment") String comment, @RequestParam("name") String name,
+                                @RequestParam("job") String job, @RequestParam("image")
+                                MultipartFile file) throws IOException {
         ImageData imageData = imageDataService.uploadImage(file);
 
         Testimony testimony = new Testimony();
+        testimony.setName(name);
         testimony.setJob(job);
         testimony.setComment(comment);
         testimony.setImage(imageData.getId());
@@ -54,8 +56,11 @@ public class TestimonyController {
     }
 
     @PatchMapping("/{id}")
-    public HttpEntity<?> update(@PathVariable int id, @RequestParam(value = "comment", required = false) String comment,
-                                @RequestParam(value = "job", required = false) String job, @RequestParam(value = "image", required = false)
+    public HttpEntity<?> update(@PathVariable int id, @RequestParam(value = "comment",
+            required = false) String comment,
+                                @RequestParam(value = "job", required = false) String job,
+                                @RequestParam(value = "name", required = false) String name,
+                                @RequestParam(value = "image", required = false)
                                 MultipartFile file) throws IOException {
         ImageData imageData = null;
         Testimony testimony = new Testimony();
@@ -66,10 +71,9 @@ public class TestimonyController {
             testimony.setImage(null);
         }
 
+        testimony.setName(name);
         testimony.setJob(job);
         testimony.setComment(comment);
-
-
         Testimony insert = testimonyService.insert(testimony);
         return ResponseEntity.status(HttpStatus.CREATED).body(insert);
 
