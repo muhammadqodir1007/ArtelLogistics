@@ -57,6 +57,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.GET, "/api/information/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/testimony/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/api/banner/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/services/**").permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )
