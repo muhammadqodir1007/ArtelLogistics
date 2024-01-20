@@ -12,16 +12,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Information {
+public class Testimony {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String about_en;
-    String about_ru;
-    String about_uz;
-    String email;
-    String number;
-    String location;
-    Long image;
+    private int id;
+    private Long image;
+    private String job;
+    private String comment;
 }

@@ -15,8 +15,6 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("api/contact")
 public class ContactController {
-
-
     ContactService contactService;
     SenderTelegramBot senderTelegramBot;
 
