@@ -62,6 +62,9 @@ public class InformationServiceImpl implements InformationService {
         if (newInformation.getAbout_ru() != null) {
             oldInformation.setAbout_ru(newInformation.getAbout_ru());
         }
+        if (newInformation.getImage() != null) {
+            oldInformation.setImage(newInformation.getImage());
+        }
         if (newInformation.getAbout_uz() != null) {
             oldInformation.setAbout_uz(newInformation.getAbout_uz());
         }

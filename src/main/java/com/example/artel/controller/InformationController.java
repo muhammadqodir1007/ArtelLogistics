@@ -65,10 +65,9 @@ public class InformationController {
                                 @RequestParam(value = "image", required = false) MultipartFile file
 
     ) throws IOException {
-        ImageData imageData = null;
         Information information = new Information();
         if (file != null) {
-            imageData = imageDataService.uploadImage(file);
+            ImageData   imageData = imageDataService.uploadImage(file);
             information.setImage(imageData.getId());
         } else {
             information.setImage(null);
