@@ -55,7 +55,14 @@ public class InformationController {
     }
 
     @PatchMapping("/{id}")
-    public HttpEntity<?> update(@PathVariable int id, @RequestParam(value = "about_en", required = false) String about_en, @RequestParam(value = "about_ru", required = false) String about_ru, @RequestParam(value = "about_uz", required = false) String about_uz, @RequestParam(value = "email", required = false) String email, @RequestParam(value = "number", required = false) String number, @RequestParam(value = "location", required = false) String location, @RequestParam(value = "image", required = false) MultipartFile file
+    public HttpEntity<?> update(@PathVariable int id,
+                                @RequestParam(value = "about_en", required = false) String about_en,
+                                @RequestParam(value = "about_ru", required = false) String about_ru,
+                                @RequestParam(value = "about_uz", required = false) String about_uz,
+                                @RequestParam(value = "email", required = false) String email,
+                                @RequestParam(value = "number", required = false) String number,
+                                @RequestParam(value = "location", required = false) String location,
+                                @RequestParam(value = "image", required = false) MultipartFile file
 
     ) throws IOException {
         ImageData imageData = null;
@@ -66,8 +73,6 @@ public class InformationController {
         } else {
             information.setImage(null);
         }
-
-
         information.setAbout_en(about_en);
         information.setAbout_uz(about_uz);
         information.setAbout_ru(about_ru);
@@ -75,8 +80,8 @@ public class InformationController {
         information.setLocation(location);
         information.setNumber(number);
 
-        Information insert = informationService.insert(information);
-        return ResponseEntity.status(HttpStatus.CREATED).body(insert);
+        informationService.update(id, information);
+        return ResponseEntity.status(HttpStatus.OK).body("updated");
     }
 
 
