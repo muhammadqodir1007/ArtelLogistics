@@ -1,5 +1,4 @@
 package com.example.artel.controller;
-
 import com.example.artel.entity.Testimony;
 import com.example.artel.image.ImageData;
 import com.example.artel.image.ImageDataService;
@@ -10,17 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
 import java.util.List;
-
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/testimony")
 public class TestimonyController {
     ImageDataService imageDataService;
-
-
     TestimonyService testimonyService;
 
     @GetMapping
@@ -47,8 +42,6 @@ public class TestimonyController {
         testimony.setJob(job);
         testimony.setComment(comment);
         testimony.setImage(imageData.getId());
-
-
         Testimony insert = testimonyService.insert(testimony);
         return ResponseEntity.status(HttpStatus.CREATED).body(insert);
 
@@ -70,20 +63,16 @@ public class TestimonyController {
         } else {
             testimony.setImage(null);
         }
-
         testimony.setName(name);
         testimony.setJob(job);
         testimony.setComment(comment);
-        Testimony insert = testimonyService.insert(testimony);
-        return ResponseEntity.status(HttpStatus.CREATED).body(insert);
-
+        testimonyService.update(id, testimony);
+        return ResponseEntity.ok("updated");
 
     }
 
-
     @DeleteMapping("/{id}")
     private HttpEntity<?> delete(@PathVariable int id) {
-
         testimonyService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("deleted");
     }
