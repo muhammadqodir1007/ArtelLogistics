@@ -36,7 +36,6 @@ public class InformationServiceImpl implements InformationService {
     public void update(int id, Information information) {
         Information editedInformation = informationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Information not found"));
         Information information1 = checkInformation(editedInformation, information);
-
         informationRepository.save(information1);
     }
 
@@ -76,7 +75,6 @@ public class InformationServiceImpl implements InformationService {
         }
         if (newInformation.getLocation() != null) {
             oldInformation.setLocation(newInformation.getLocation());
-
 
         }
         return oldInformation;

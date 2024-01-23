@@ -81,7 +81,6 @@ public class ServiceTypeController {
             news.setImageId(null);
         }
 
-
         news.setDescription_ru(description_ru);
         news.setDescription_en(description_en);
         news.setDescription_uz(description_uz);

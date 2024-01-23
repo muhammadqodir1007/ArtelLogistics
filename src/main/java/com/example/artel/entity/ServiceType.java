@@ -1,9 +1,6 @@
 package com.example.artel.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,8 +18,11 @@ public class ServiceType {
     String title_uz;
     String title_ru;
     String title_en;
+    @Column(length = 1000)
     String description_uz;
+    @Column(length = 1000)
     String description_ru;
+    @Column(length = 1000)
     String description_en;
     Long imageId;
 }
